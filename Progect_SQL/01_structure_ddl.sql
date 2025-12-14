@@ -24,7 +24,7 @@ CREATE TABLE users (
 CREATE TABLE cars (
     id SERIAL PRIMARY KEY,
     plate VARCHAR(20) NOT NULL UNIQUE,
-    make VARCHAR(50) NOT NULL,
+    make VARCHAR(50) NOT NULL, --производитель
     model VARCHAR(50) NOT NULL,
     current_odo REAL DEFAULT 0.0 CHECK (current_odo >= 0),
     is_active BOOLEAN DEFAULT TRUE,
@@ -55,6 +55,8 @@ CREATE TABLE photos (
     session_id INTEGER REFERENCES car_sessions(id) ON DELETE CASCADE,
     car_id INTEGER NOT NULL REFERENCES cars(id) ON DELETE CASCADE,
     storage_uri TEXT NOT NULL,
-    purpose photo_purpose NOT NULL,
+    -- puspose: odometer (фото одометра)
+    -- purpose: car (фотографии автомобиля до/после поездки)
+    purpose photo_purpose NOT NULL, 
     taken_at TIMESTAMPTZ DEFAULT NOW()
 );
